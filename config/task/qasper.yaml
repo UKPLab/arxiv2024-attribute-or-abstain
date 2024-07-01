@@ -1,0 +1,49 @@
+defaults:
+  - base_task_config
+  - _self_
+
+task_name: qasper
+
+max_new_tokens: 100
+
+metrics:
+  - 'answer_f1'
+
+answer_has_multiple_statements: False
+is_include_node_types:
+  - "article-title"
+  - "abstract"
+  - "title"
+  - "p"
+deep_or_shallow: 'deep'
+
+# Prompt
+has_statement: False
+
+# QASPER-specific
+qasper_text_evidence_only: True
+count_missing_predictions: False # In cases of missing questions in the predictions, whether to count them into the final result. When true, they count as F1=0
+
+# Pruning
+keep_k_random_nodes_when_pruning: 2
+
+retrieve_then_read_short_k: 2
+retrieve_then_read_short_model: sbert
+retrieve_then_read_short_sbert_model_name: dragon
+retrieve_then_read_long_k: 10
+retrieve_then_read_long_model: contriever
+retrieve_then_read_long_sbert_model_name: null
+post_hoc_extraction_k: 2
+post_hoc_extraction_model: sbert
+post_hoc_extraction_sbert_model_name: dragon
+
+task_input_template: |-
+  Scientific Article: {context} [End of Document]
+  Question: {question}
+
+example_ids:
+  - 11 # extractive, 2 extraction nodes
+  - 0 # abstractive, 1 extraction nodes
+  - 17 # Unanswerable
+  - 50 # Yes, 2 extraction nodes
+  - 55 # No

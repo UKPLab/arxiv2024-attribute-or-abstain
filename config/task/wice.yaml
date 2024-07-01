@@ -1,0 +1,51 @@
+defaults:
+  - base_task_config
+  - _self_
+
+task_name: wice
+
+max_new_tokens: 50
+
+metrics:
+  - 'classification_f1'
+
+answer_has_multiple_statements: False
+is_include_node_types:
+  - "article-title"
+  - "p"
+wice_claim_or_subclaim: 'claim'
+
+classes:
+  - 'partially supported'
+  - 'not supported'
+  - 'supported'
+use_all_annotations_for_evidence_f1: True
+
+# Prompt
+has_statement: True
+
+# QASPER-specific
+count_missing_predictions: False # In cases of missing questions in the predictions, whether to count them into the final result. When true, they count as F1=0
+
+# Pruning
+keep_k_random_nodes_when_pruning: 5
+
+retrieve_then_read_short_k: 5
+retrieve_then_read_short_model: sbert
+retrieve_then_read_short_sbert_model_name: all-mpnet-base-v2
+retrieve_then_read_long_k: 10
+retrieve_then_read_long_model: bm25
+retrieve_then_read_long_sbert_model_name: null
+post_hoc_extraction_k: 5
+post_hoc_extraction_model: contriever
+post_hoc_extraction_sbert_model_name: null
+
+task_input_template: |-
+  Document: {context} [End of Document]
+  Claim: {statement}
+  Additional Info: {additional_info}
+
+example_ids:
+  - 0 # partially supported
+  - 1 # supported
+  - 6 # not supported

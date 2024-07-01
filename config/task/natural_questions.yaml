@@ -1,0 +1,56 @@
+defaults:
+  - base_task_config
+  - _self_
+
+task_name: natural_questions
+
+max_new_tokens: 50
+
+metrics:
+  - 'answer_f1'
+
+train_filenames: train_filtered.json
+dev_filenames: dev_filtered.json
+test_filenames: test_filtered.json
+
+answer_has_multiple_statements: False
+
+null_answer_string: 'unanswerable'
+has_statement: False
+is_include_node_types:
+  - "article-title"
+  - "abstract"
+  - "title"
+  - "p"
+  - "list"
+  - "list-item"
+  - "table"
+  - "table-row"
+  - "table-item"
+
+# Natural Questions-specific
+natural_questions_use_first_non_null_answer: True
+
+count_missing_predictions: False
+
+# Pruning
+keep_k_random_nodes_when_pruning: 1
+
+retrieve_then_read_short_k: 2
+retrieve_then_read_short_model: sbert
+retrieve_then_read_short_sbert_model_name: all-mpnet-base-v2
+retrieve_then_read_long_k: 10
+retrieve_then_read_long_model: sbert
+retrieve_then_read_long_sbert_model_name: dragon
+post_hoc_extraction_k: 2
+post_hoc_extraction_model: contriever
+post_hoc_extraction_sbert_model_name: null
+
+task_input_template: |-
+  Document: {context} [End of Document]
+  Question: {question}
+
+example_ids:
+  - 0 # unanswerable
+  - 9 # short answer
+  - 500 # yes

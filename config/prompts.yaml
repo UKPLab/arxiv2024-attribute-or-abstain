@@ -1,0 +1,64 @@
+system_prompt:
+  basic: You are a helpful AI assistant.
+
+task_explanation:
+  qasper:
+    empty: ''
+    answer_and_segments: You are given a Scientific Article and a Question. Answer the Question as concisely as you can, using a single phrase or sentence. If the Question cannot be answered based on the information in the Article, answer "unanswerable". If the question is a yes/no question, your answer should be "yes", "no", or "unanswerable". Do not provide any explanation. If the question can be answered, provide one or several evidence paragraphs that can be used to verify the answer. Give as few paragraphs as possible.
+    answer_only: You are given a Scientific Article and a Question. Answer the Question as concisely as you can, using a single phrase or sentence if possible. If the Question cannot be answered based on the information in the Article, write "unanswerable". If the question is a yes/no question, answer "yes", "no", or "unanswerable". Do not provide any explanation.
+    segments_only: You are given a Scientific Article and a Question. If the Question can be answered, provide one or several segments that contain the answer. Give as few segments as possible.
+    segments_only_short: "Return the segment that contains the answer to the question:"
+  evidence_inference:
+    empty: ''
+    answer_and_segments: You are given a clinical study report and a question. Assess the effect of a treatment on a clinical outcome, compared to a control treatment. The options are "significantly increased", "significantly decreased" and "no significant difference". Do not provide any explanation. Provide one or several evidence paragraphs that can be used to verify the answer. Give as few paragraphs as possible.
+    answer_only: You are given a clinical study report and a question. Assess the effect of a treatment on a clinical outcome, compared to a control treatment. The options are "significantly increased", "significantly decreased" and "no significant difference". Do not provide any explanation.
+    # segments_only: You are given a clinical study report and a question. Return the paragraphs from the clinical report that are relevant for answering the question. Give as few paragraphs as possible. Do not provide any explanation.
+  natural_questions:
+    answer_and_segments: 'You are given a Wikipedia page and a question about that page. Answer the question as concisely as you can, using at most five (5) words. If the question cannot be answered based on the information in the article, write "unanswerable". If the question is a yes/no question, answer "yes", "no", or "unanswerable". Do not provide any explanation. If the question can be answered, provide one evidence paragraph that can be used to verify the answer.'
+    answer_only: 'You are given a Wikipedia page and a question about that page. Answer the question as concisely as you can, using at most five (5) words. If the question cannot be answered based on the information in the article, write "unanswerable". If the question is a yes/no question, answer "yes", "no", or "unanswerable". Do not provide any explanation.'
+    empty: ''
+  govreport:
+    answer_and_segments: You are given a government report document. Write a one page summary of the document. Each sentence in your summary should reference the source paragraphs from the document that can be used to verify the summary sentence.
+    answer_only: You are given a government report document. Write a one page summary of the document.
+  contract_nli:
+    answer_and_segments: You are given a non disclosure agreement contract and a statement. Determine the relation between the contract and the statement. You can choose between “entailment”, “contradiction” and “not mentioned”. Do not add any explanation. If you answer “entailment” or “contradiction”, provide the evidence paragraphs from the contract that can be used to verify the answer. Give as few paragraphs as possible.
+    answer_only: You are given a non disclosure agreement contract and a statement. Determine the relation between the contract and the statement. You can choose between “entailment”, “contradiction” and “not mentioned”. Do not add any explanation.
+  qasa:
+    answer_and_segments: You are given a Scientific Article and a Question. Answer the Question concisely, using at most 4 sentences. If the Question cannot be answered based on the information in the Article, answer "unanswerable". If the question can be answered, provide one or several evidence paragraphs that can be used to verify the answer. Give as few paragraphs as possible.
+    answer_only: You are given a Scientific Article and a Question. Answer the Question concisely, using at most 4 sentences. If the Question cannot be answered based on the information in the Article, answer "unanswerable".
+  wice:
+    answer_and_segments: You are given a document and a claim. Evaluate if the claim is supported by the document. You can choose between “supported”, “partially supported” and “not supported”. Do not add any explanation. If you answer “supported” or “partially supported”, provide the evidence sentences from the document that can be used to verify the answer. Give as few sentences as possible.
+    answer_only: You are given a document and a claim. Evaluate if the claim is supported by the document. You can choose between “supported”, “partially supported” and “not supported”. Do not add any explanation.
+format_explanation: # Dummy formatted answers (e.g. {"answer": <answer>}) are added automatically if needed
+  # extraction mode
+  text:
+    # multi statement or single statement answer
+    single:
+      # answer_format
+      empty: ''
+      structured_text: |- # dummy answer is inserted automatically after text
+        Your reply must be in the following format:
+        {dummy_answer}
+      json: |- # dummy json is inserted automatically after text
+        Your reply must be in json format:
+        {dummy_answer}
+        In your answer, replace
+  # extraction_mode
+  node_id:
+    # multi-statement or single statement answer
+    single:
+      # answer_format
+      empty: ''
+      text: |- # dummy answer is inserted automatically after text
+        Your reply must have the following format:
+        "{dummy_answer}"
+        In your reply, replace <answer> with your solution to the task. Your reply must be followed by the ids of the relevant segments from the document.
+      json: |- # dummy json is inserted automatically after text
+        Your answer must be in json format:
+        {dummy_answer}
+        For key "answer", the value should be your solution to the task. For key "segments", provide a list of ids of the segments relevant to your answer.
+    multi:
+      text: |- # dummy answer is inserted automatically after text
+        Your reply must have the following format:
+        "{dummy_answer}"
+        In your reply, replace <answer_sentence_1> with your first sentence, <answer_sentence_2> with your second sentence, and so forth. Each sentence must be followed by the ids of the segments relevant to the sentence.

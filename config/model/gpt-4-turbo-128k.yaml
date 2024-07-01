@@ -1,0 +1,33 @@
+defaults:
+  - base_model_config
+
+model_name: gpt-4-turbo-128k
+model_class: api_lm
+hf_model_id: openai-community/gpt2
+
+# MODEL PARAMETERS
+max_input_length: 13000
+
+batch_size: 1
+
+# Because the chat completion API expects multiple rounds of messages, the
+# prompt templates only contain statement, question and document.
+# Task and format explanation (and examples) are added a separate messages.
+# See api_lm/APILMForExtraction.openai_chat_complete
+prompt_template_without_example: |-
+  {task_input}
+  {task_explanation}
+  {format_explanation}
+prompt_template_with_example: |-
+  {task_input}
+example_template: |-
+  {task_input}
+system_message_template: |-
+  {system_prompt}
+  {task_explanation} 
+  {format_explanation}
+
+# OpenAI
+deployment_name: gpt4-turbo-128k
+azure_openai_endpoint: null
+api_key: null

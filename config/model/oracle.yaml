@@ -1,0 +1,13 @@
+defaults:
+  - base_model_config
+
+model_name: oracle
+model_class: oracle
+
+batch_size: 10
+accumulate_grad_batches: 1
+max_steps: 10000
+min_steps: 10000
+val_check_interval: 1000  # seen instances, not steps!
+
+oracle_return_random_non_gold_evidence: False

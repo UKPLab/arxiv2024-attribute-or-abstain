@@ -1,0 +1,48 @@
+defaults:
+  - base_task_config
+  - _self_
+
+task_name: qasa
+
+max_new_tokens: 200
+
+metrics:
+  - 'rouge_l'
+
+answer_has_multiple_statements: True
+is_include_node_types:
+  - "article-title"
+  - "p"
+
+# Prompt
+has_statement: False
+
+count_missing_predictions: False # In cases of missing questions in the predictions, whether to count them into the final result. When true, they count as F1=0
+
+# qasa_specific
+qasa_example_ids_in_test_set:
+  - 'paper_72_1' # testing question
+  - 'paper_29_13' # shallow question
+  - 'paper_88_2' # unanswerable
+
+# Pruning
+keep_k_random_nodes_when_pruning: 2
+
+retrieve_then_read_short_k: 3
+retrieve_then_read_short_model: sbert
+retrieve_then_read_short_sbert_model_name: dragon
+retrieve_then_read_long_k: 10
+retrieve_then_read_long_model: sbert
+retrieve_then_read_long_sbert_model_name: sentence-transformers/gtr-t5-large
+post_hoc_extraction_k: 3
+post_hoc_extraction_model: bm25
+post_hoc_extraction_sbert_model_name: null
+
+task_input_template: |-
+  Scientific Article: {context} [End of Document]
+  Question: {question}
+
+example_ids:
+  - 0 # testing question
+  - 1 # shallow question
+  - 2 # unanswerable

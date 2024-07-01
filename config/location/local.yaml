@@ -1,0 +1,6 @@
+datasets: ../data/datasets
+models: ../data/models
+tensorboard: ../data/tensorboard
+results: ../data/results
+prompts: config/prompts.yaml
+openai_cost_tracking: ../data/openai_cost_tracking

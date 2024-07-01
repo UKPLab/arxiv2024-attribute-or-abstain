@@ -1,0 +1,65 @@
+defaults:
+  - base_model_config
+
+model_name: "gemma-7b-it"
+model_class: causal_lm
+load_from_shared: True
+hf_model_id: "google/gemma-7b-it"
+
+# MODEL PARAMETERS
+max_input_length: 8000
+
+d_model_name: "hidden_size"
+final_layer_idx: -1
+
+# STRUCTURE INFUSION
+# Position embeddings
+pe_init_std: 0
+
+# Extraction
+extraction_weight: 0.5
+use_extraction_loss_weights: False
+
+# TRAINING PARAMETERS
+max_steps: 3750
+val_check_interval: 1000
+
+batch_size: 1
+accumulate_grad_batches: 8
+learning_rate: 1e-4
+
+prompt_template_without_example: |-
+  <start_of_turn>user
+  Task: {task_explanation}
+  Answer format: {format_explanation}
+  {task_input}
+  {task_explanation}
+  {format_explanation}
+  <start_of_turn>model
+prompt_template_with_example: |-
+  <start_of_turn>user
+  Task: {task_explanation}
+  Answer format: {format_explanation}
+  {example}
+  <start_of_turn>user
+  {task_input}
+  <start_of_turn>model
+prompt_template_training: |-
+  <start_of_turn>user
+  {task_explanation}
+  {task_input}
+  <start_of_turn>model
+example_template: |-
+  <start_of_turn>user
+  {task_input}
+  <start_of_turn>model
+  {answer}<end_of_turn>
+
+# LORA
+use_lora: True
+lora_r: 64
+lora_alpha: 16
+lora_dropout: 0.1
+lora_target_modules:
+  - "q_proj"
+  - "v_proj"

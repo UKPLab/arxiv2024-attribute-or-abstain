@@ -1,0 +1,49 @@
+defaults:
+  - base_task_config
+  - _self_
+
+task_name: govreport
+
+metrics:
+  - 'rouge_l'
+
+max_new_tokens: 500
+
+answer_has_multiple_statements: True
+is_include_node_types:
+  - "article-title"
+  - "abstract"
+  - "title"
+  - "p"
+deep_or_shallow: 'deep'
+
+# Prompt
+has_statement: False
+
+# GovReport specific
+govreport_part: 'full'
+
+count_missing_predictions: False # In cases of missing questions in the predictions, whether to count them into the final result. When true, they count as F1=0
+
+# Pruning
+keep_k_random_nodes_when_pruning: 2
+
+retrieve_then_read_short_k: 2
+retrieve_then_read_short_model: sbert
+retrieve_then_read_short_sbert_model_name: all-mpnet-base-v2
+retrieve_then_read_long_k: 10
+retrieve_then_read_long_model: sbert
+retrieve_then_read_long_sbert_model_name: all-mpnet-base-v2
+post_hoc_extraction_k: 2
+post_hoc_extraction_model: bm25
+post_hoc_extraction_sbert_model_name: null
+
+task_input_template: |-
+  Document: {context} [End of Document]
+  {question}
+
+example_ids:
+  - 2 # GAO, 2 questions
+  - 10001 # RS
+  - 3 # GAO
+  - 10003 # RS

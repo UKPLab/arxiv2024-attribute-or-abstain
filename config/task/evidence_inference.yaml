@@ -1,0 +1,44 @@
+defaults:
+  - base_task_config
+
+task_name: evidence_inference
+
+metrics:
+  - 'classification_f1'
+
+max_new_tokens: 50
+
+answer_has_multiple_statements: False
+deep_or_shallow: "deep"
+is_include_node_types:
+  - "article-title"
+  - "abstract"
+  - "title"
+  - "p"
+has_statement: False
+
+keep_k_random_nodes_when_pruning: 2
+
+retrieve_then_read_short_k: 2
+retrieve_then_read_short_model: contriever
+retrieve_then_read_short_sbert_model_name: null
+retrieve_then_read_long_k: 10
+retrieve_then_read_long_model: sbert
+retrieve_then_read_long_sbert_model_name: sentence-transformers/gtr-t5-large
+post_hoc_extraction_k: 2
+post_hoc_extraction_model: sbert
+post_hoc_extraction_sbert_model_name: dragon
+
+classes:
+  - "significantly increased"
+  - "significantly decreased"
+  - "no significant difference"
+
+task_input_template: |-
+  Document: {context} [End of Document]
+  Question: {question}
+
+example_ids:
+  - 0 # no significant difference
+  - 6 # significantly increased
+  - 10 # significantly decreased

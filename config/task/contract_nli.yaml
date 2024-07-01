@@ -1,0 +1,51 @@
+defaults:
+  - base_task_config
+  - _self_
+
+task_name: contract_nli
+
+max_new_tokens: 50
+
+metrics:
+  - 'classification_f1'
+
+answer_has_multiple_statements: False
+is_include_node_types:
+  - "article-title"
+  - "p"
+#####wice_claim_or_subclaim: 'claim'
+
+classes:
+  - 'entailment'
+  - 'contradiction'
+  - 'not mentioned'
+
+use_all_annotations_for_evidence_f1: True
+
+# Prompt
+has_statement: True
+
+# QASPER-specific
+count_missing_predictions: False # In cases of missing questions in the predictions, whether to count them into the final result. When true, they count as F1=0
+
+# Pruning
+keep_k_random_nodes_when_pruning: 2
+
+retrieve_then_read_short_k: 2
+retrieve_then_read_short_model: sbert
+retrieve_then_read_short_sbert_model_name: sentence-transformers/gtr-t5-large
+retrieve_then_read_long_k: 10
+retrieve_then_read_long_model: sbert
+retrieve_then_read_long_sbert_model_name: dragon
+post_hoc_extraction_k: 2
+post_hoc_extraction_model: sbert
+post_hoc_extraction_sbert_model_name: sentence-transformers/gtr-t5-large
+
+task_input_template: |-
+  Contract: {context} [End of Document]
+  Statement: {statement}
+
+example_ids:
+  - 2 # entailment
+  - 0 # not mentioned
+  - 21 # contradiction

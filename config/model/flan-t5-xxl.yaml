@@ -1,0 +1,57 @@
+defaults:
+  - base_model_config
+
+model_name: "flan-t5-xxl"
+model_class: seq2seq_lm
+load_from_shared: True
+shared_checkpoint_path: "/mnt/beegfs/shared/shared_model_weights/models--google--flan-t5-xxl-hf/flan-t5-xxl"
+hf_model_id: "google/flan-t5-xxl"
+
+# MODEL PARAMETERS
+max_input_length: 8000
+
+d_model_name: "hidden_size"
+final_layer_idx: -1
+
+# STRUCTURE INFUSION
+# Position embeddings
+pe_init_std: 0
+
+# Extraction
+extraction_weight: 0.5
+use_extraction_loss_weights: False
+
+# TRAINING PARAMETERS
+max_steps: 1998
+val_check_interval: 1000
+
+batch_size: 1
+accumulate_grad_batches: 8
+learning_rate: 2e-4
+
+prompt_template_with_example: |-
+  Task: {task_explanation}
+  Answer format: {format_explanation}
+  {task_input}
+  {task_explanation}
+  {format_explanation}
+prompt_template_without_example: |-
+  Task: {task_explanation}
+  Answer format: {format_explanation}
+  {example}
+  {task_input}
+prompt_template_training: |-
+  Task: {task_explanation}
+  {task_input}
+example_template: |-
+  {task_input}
+  {answer}
+
+# LORA
+use_lora: True
+lora_r: 64
+lora_alpha: 16
+lora_dropout: 0.1
+lora_target_modules:
+  - 'q'
+  - 'v'

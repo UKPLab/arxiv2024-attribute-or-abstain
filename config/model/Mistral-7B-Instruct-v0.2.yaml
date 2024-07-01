@@ -1,0 +1,60 @@
+defaults:
+  - base_model_config
+
+model_name: "Mistral-7B-Instruct-v0.2"
+model_class: causal_lm
+load_from_shared: False
+hf_model_id: "mistralai/Mistral-7B-Instruct-v0.2"
+
+# MODEL PARAMETERS
+max_input_length: 16000
+
+d_model_name: "hidden_size"
+final_layer_idx: -1
+
+# STRUCTURE INFUSION
+# Position embeddings
+pe_init_std: 0
+
+# Extraction
+extraction_weight: 0.5
+use_extraction_loss_weights: False
+
+# TRAINING PARAMETERS
+max_steps: 3750
+val_check_interval: 1000
+
+batch_size: 1
+accumulate_grad_batches: 8
+learning_rate: 1e-4
+
+# <s> Is added automatically at beginning of prompt
+prompt_template_without_example: |-
+  [INST] Task: {task_explanation}
+  Answer format: {format_explanation}
+  {task_input}
+  {task_explanation}
+  {format_explanation} [/INST]
+prompt_template_with_example: |-
+  [INST] Task: {task_explanation}
+  Answer format: {format_explanation} [/INST]
+  {example}
+  [INST]{task_input} [/INST]
+prompt_template_training: |-
+  [INST] Task: {task_explanation}
+  {task_input} [/INST]
+example_template: |-
+  [INST]{task_input} [/INST]{answer}</s>
+
+# User input should start with <s>
+# Assistant generation should end with </s>
+# https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2
+
+# LORA
+use_lora: True
+lora_r: 64
+lora_alpha: 16
+lora_dropout: 0.1
+lora_target_modules:
+  - "q_proj"
+  - "v_proj"

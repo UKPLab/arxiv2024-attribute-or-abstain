@@ -1,0 +1,50 @@
+defaults:
+  - base_model_config
+
+model_name: "Meta-Llama-3-8B-Instruct"
+model_class: causal_lm
+hf_model_id: 'meta-llama/Meta-Llama-3-8B-Instruct'
+load_from_shared: False
+
+# MODEL PARAMETERS
+max_input_length: 8192
+
+d_model_name: "hidden_size"
+final_layer_idx: -1
+
+# TRAINING PARAMETERS
+max_steps: 3750
+val_check_interval: 1000
+
+batch_size: 1
+accumulate_grad_batches: 8
+learning_rate: 1e-4
+
+prompt_template_without_example: |-
+  <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+  Task: {task_explanation}
+  Answer format: {format_explanation}<|eot_id|><|start_header_id|>user<|end_header_id|>
+  {task_input}
+  {task_explanation}
+  {format_explanation}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+prompt_template_with_example: |-
+  <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+  Task: {task_explanation}
+  Answer format: {format_explanation}<|eot_id|><|start_header_id|>user<|end_header_id|>
+  {example}
+  {task_input}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+prompt_template_training: |-
+  <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+  {task_explanation}<|eot_id|><|start_header_id|>user<|end_header_id|>
+  {task_input}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+example_template: |-
+  {task_input}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+  {answer}<|eot_id|><|start_header_id|>user<|end_header_id|>
+# LORA
+use_lora: True
+lora_r: 64
+lora_alpha: 16
+lora_dropout: 0.1
+lora_target_modules:
+  - "q_proj"
+  - "v_proj"

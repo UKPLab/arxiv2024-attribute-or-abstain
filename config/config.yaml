@@ -1,0 +1,133 @@
+slurm_job_id: 0
+description: "dummy-description"
+commit_hash: "dummy-commit-hash"
+
+defaults:
+  - base_config
+  - _self_
+  - location: shared
+  - task: qasper
+  - model: vicuna-7B-v1.5-16K
+  - override hydra/hydra_logging: disabled
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+# Pre-processed instances
+instances_path: null
+
+# Extraction
+required_aspects: answer_and_segments # Options: answer_and_segments, answer_only, segments_only
+extraction_mode: node_id # Options: text, node_id
+answer_format: text # Options: text, structured_text, json
+
+do_post_hoc_extract: False
+post_hoc_retrieval_model: bm25
+post_hoc_retrieval_k: 2
+post_hoc_retrieval_threshold: null
+post_hoc_sbert_model_name: 'all-mpnet-base-v2'
+
+do_retrieve_then_read: False
+retrieve_then_read_model: bm25
+retrieve_then_read_k: 10
+retrieve_then_read_threshold: null
+retrieve_then_read_sbert_model_name: 'all-mpnet-base-v2'
+return_all_extraction_candidates: False
+
+# TRAINING & MODEL
+remote_debug: False
+do_train: False
+use_dev_as_test_data: True
+use_first_n_test_instances: 50
+load_model: False
+hash_to_load: null
+checkpoint_step_idx: null
+save_predictions: True
+log_test_predictions: True
+log_val_predictions: False
+log_loss_every_n_batches: 10
+use_cache: True
+lr_scheduler_type: cosine
+
+# INPUT SEQUENCE
+is_mode: "vanilla"
+is_replace_newlines: False
+is_node_separator: "\n"
+is_include_node_types: # This can be overridden by the tasks
+  - "article-title"
+  - "abstract"
+  - "title"
+  - "p"
+  - "list"
+  - "list-item"
+  - "table"
+  - "table-row"
+  - "table-item"
+
+# Document Pruning
+do_prune_to_extraction_nodes: False
+keep_structure_when_pruning: False
+
+# ENGINEERING
+precision: bf16
+dataloader_num_workers: 2
+use_vllm: False
+
+random_seed: 635191
+deterministic_trainer: False  # this crashes LED self-attention
+
+# Prompt
+# system_prompt, task_explanation, format_explanation and example are
+# automatically set in model initialization (BaseModel.set_prompt_elements()).
+# They are part of the config to document them after evaluation.
+system_prompt: null
+system_prompt_idx: basic
+task_explanation: null
+task_explanation_idx: auto
+format_explanation: null
+format_explanation_idx: auto
+example: null
+n_examples: 3
+shorten_example_docs: to_extraction_nodes # Options: null, to_extraction_nodes
+example_doc_max_n_chars_per_node: 100
+example_use_n_surrounding_nodes: 2
+node_id_template: '[{node_id}]'
+format_explanation_n_dummy_segments: 2
+prompt_input_variables:
+  - "task_explanation"
+  - "format_explanation"
+  - "example"
+  - "task_input"
+task_input_variables:
+  - "question"
+  - "statement"
+  - "context"
+  - "additional_info"
+
+# OpenAI
+openai_api_version: 2023-05-15
+openai_api_type: azure
+
+# Unanswerable keywords (taken from Slobodkin et al, 2023)
+unanswerable_keywords:
+  - "unanswerable"
+  - "n/a"
+  - "i don't know"
+  - "idk"
+  - "not known"
+  - "answer not in context"
+  - "unknown"
+  - "no answer"
+  - "it is unknown"
+  - "the answer is unknown"
+  - "unavailable"
+  - "not clear"
+  - "i cannot provide"
+  - "i cannot directly provide"
+  - "i cannot answer"
+  - "i cannot display"
+  - "not clear"
+  - "not available"
+  - "not readily available"
