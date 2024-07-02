@@ -2,11 +2,21 @@
 
 <img src="img/Eyecatcher.drawio.png" width="500">
 
-Jan Buchmann, Xiao Liu, Iryna Gurevych
+Jan Buchmann (maintainer), Xiao Liu, Iryna Gurevych
 
 [Ubiquitous Knowledge Processing Lab](https://www.informatik.tu-darmstadt.de/ukp/ukp_home/index.en.jsp) (UKP), TU Darmstadt
 
-This repository contains the evaluation and analysis code for LAB, the **L**ong document **A**ttribution **B**enchmark introduced in the paper "Attribute or Abstain: Large Language Models as Long Document Assistants" (Arxiv ink will follow soon). 
+This repository contains the evaluation and analysis code for LAB, the **L**ong document **A**ttribution **B**enchmark introduced in the paper "Attribute or Abstain: Large Language Models as Long Document Assistants" (Arxiv link will follow soon). The benchmark consists of 6 diverse long document tasks: 
+
+- QASPER (scientific QA, Dasigi et al., 2021)
+- Natural Questions (QA on Wiki pages, Kwiatkowski et al., 2019)
+- Evidence Inference (classification of clinical trial reports, DeYoung et al., 2020)
+- Wice (fact checking, Kamoi et al., 2023)
+- ContractNLI (legal NLI, Koreeda and Manning, 2021)
+ tests the ability of LLMs (in combination with retrievers) to produce responses
+- GovReport (summarization, Huang et al., 2021)
+
+To perform well on the benchmark, models need to provide correct responses and extract evidence from the documents that support their response (attribute). If there is not enough information to provide a useful response, models should explicitly state this (abstain).
 
 To download the pre-formatted datasets, please see [here](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/4276.2).
 
@@ -35,12 +45,6 @@ conda activate lab_env
 # There is a requirements conflict because we are using cuda 11.8,
 # so  installation is done in this bash script
 bash install.sh
-
-# Download NLTK punkt tokenizer
-# Open python shell
-python
->>> import nltk
->>> nltk.download('punkt')
 ```
 
 ## Basic Usage
@@ -206,6 +210,137 @@ To view the logs in your browser, follow these steps:
 If you use our data or code in your research, please cite
 
 TODO: add citation
+
+## References
+
+```
+@inproceedings{dasigi-etal-2021-dataset,
+    title = "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+    author = "Dasigi, Pradeep  and
+      Lo, Kyle  and
+      Beltagy, Iz  and
+      Cohan, Arman  and
+      Smith, Noah A.  and
+      Gardner, Matt",
+    editor = "Toutanova, Kristina  and
+      Rumshisky, Anna  and
+      Zettlemoyer, Luke  and
+      Hakkani-Tur, Dilek  and
+      Beltagy, Iz  and
+      Bethard, Steven  and
+      Cotterell, Ryan  and
+      Chakraborty, Tanmoy  and
+      Zhou, Yichao",
+    booktitle = "Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
+    month = jun,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.naacl-main.365",
+    doi = "10.18653/v1/2021.naacl-main.365",
+    pages = "4599--4610",
+}
+
+@article{kwiatkowski2019natural,
+    author = {Kwiatkowski, Tom and Palomaki, Jennimaria and Redfield, Olivia and Collins, Michael and Parikh, Ankur and Alberti, Chris and Epstein, Danielle and Polosukhin, Illia and Devlin, Jacob and Lee, Kenton and Toutanova, Kristina and Jones, Llion and Kelcey, Matthew and Chang, Ming-Wei and Dai, Andrew
+                        M. and Uszkoreit, Jakob and Le, Quoc and Petrov, Slav},
+    title = "{Natural Questions: A Benchmark for Question Answering
+                    Research}",
+    journal = {Transactions of the Association for Computational Linguistics},
+    volume = {7},
+    pages = {453-466},
+    year = {2019},
+    month = {08},
+    issn = {2307-387X},
+    doi = {10.1162/tacl_a_00276},
+    url = {https://doi.org/10.1162/tacl\_a\_00276},
+    eprint = {https://direct.mit.edu/tacl/article-pdf/doi/10.1162/tacl\_a\_00276/1923288/tacl\_a\_00276.pdf},
+}
+
+@inproceedings{deyoung-etal-2020-evidence,
+    title = "Evidence Inference 2.0: More Data, Better Models",
+    author = "DeYoung, Jay  and
+      Lehman, Eric  and
+      Nye, Benjamin  and
+      Marshall, Iain  and
+      Wallace, Byron C.",
+    editor = "Demner-Fushman, Dina  and
+      Cohen, Kevin Bretonnel  and
+      Ananiadou, Sophia  and
+      Tsujii, Junichi",
+    booktitle = "Proceedings of the 19th SIGBioMed Workshop on Biomedical Language Processing",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.bionlp-1.13",
+    doi = "10.18653/v1/2020.bionlp-1.13",
+    pages = "123--132"
+}
+
+@inproceedings{kamoi-etal-2023-wice,
+    title = "{W}i{CE}: Real-World Entailment for Claims in {W}ikipedia",
+    author = "Kamoi, Ryo  and
+      Goyal, Tanya  and
+      Diego Rodriguez, Juan  and
+      Durrett, Greg",
+    editor = "Bouamor, Houda  and
+      Pino, Juan  and
+      Bali, Kalika",
+    booktitle = "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing",
+    month = dec,
+    year = "2023",
+    address = "Singapore",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.emnlp-main.470",
+    doi = "10.18653/v1/2023.emnlp-main.470",
+    pages = "7561--7583",
+}
+
+@inproceedings{koreeda-manning-2021-contractnli-dataset,
+    title = "{C}ontract{NLI}: A Dataset for Document-level Natural Language Inference for Contracts",
+    author = "Koreeda, Yuta  and
+      Manning, Christopher",
+    editor = "Moens, Marie-Francine  and
+      Huang, Xuanjing  and
+      Specia, Lucia  and
+      Yih, Scott Wen-tau",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2021",
+    month = nov,
+    year = "2021",
+    address = "Punta Cana, Dominican Republic",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.findings-emnlp.164",
+    doi = "10.18653/v1/2021.findings-emnlp.164",
+    pages = "1907--1919"
+}
+
+@inproceedings{huang-etal-2021-efficient,
+    title = "Efficient Attentions for Long Document Summarization",
+    author = "Huang, Luyang  and
+      Cao, Shuyang  and
+      Parulian, Nikolaus  and
+      Ji, Heng  and
+      Wang, Lu",
+    editor = "Toutanova, Kristina  and
+      Rumshisky, Anna  and
+      Zettlemoyer, Luke  and
+      Hakkani-Tur, Dilek  and
+      Beltagy, Iz  and
+      Bethard, Steven  and
+      Cotterell, Ryan  and
+      Chakraborty, Tanmoy  and
+      Zhou, Yichao",
+    booktitle = "Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
+    month = jun,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.naacl-main.112",
+    doi = "10.18653/v1/2021.naacl-main.112",
+    pages = "1419--1436",
+}
+```
 
 ## Disclaimer
 
