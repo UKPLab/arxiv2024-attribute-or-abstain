@@ -6,6 +6,10 @@ Jan Buchmann (maintainer), Xiao Liu, Iryna Gurevych
 
 [Ubiquitous Knowledge Processing Lab](https://www.informatik.tu-darmstadt.de/ukp/ukp_home/index.en.jsp) (UKP), TU Darmstadt
 
+Contact: jan.buchmann@tu-darmstadt.de
+
+-----------------------------
+
 This repository contains the evaluation and analysis code for LAB, the **L**ong document **A**ttribution **B**enchmark introduced in the paper "Attribute or Abstain: Large Language Models as Long Document Assistants" (Arxiv link will follow soon). The benchmark consists of 6 diverse long document tasks: 
 
 - QASPER (scientific QA, Dasigi et al., 2021)
