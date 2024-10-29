@@ -1,0 +1,37 @@
+defaults:
+  - base_model_config
+
+# This is a template yaml file for new huggingface models. To add your own model,
+# you need to set at least the following parameters:
+# - model_name
+# - hf_model_id
+# - max_input_length
+
+model_name: "your-model-name" # This should match the file name without .yaml ending
+model_class: api_lm # Leave this
+hf_model_id: openai-community/gpt2 # The tokenizer for this hf model is used to pre-calculate the number of tokens to avoid overlength model input.
+
+# MODEL PARAMETERS
+max_input_length: 12600 # Maximum number of input tokens. If input has more tokens, it will be truncated
+
+batch_size: 1 # Leave this
+
+# Because the chat completion API expects multiple rounds of messages, the
+# prompt templates only contain statement, question and document.
+# Task and format explanation (and examples) are added as separate messages.
+# See api_lm/APILMForExtraction.openai_chat_complete.
+prompt_template_without_example: |-
+  {task_input}
+prompt_template_with_example: |-
+  {task_input}
+example_template: |-
+  {task_input}
+system_message_template: |-
+  {system_prompt}
+  {task_explanation} 
+  {format_explanation}
+
+# OpenAI
+deployment_name: "your-deployment-name"
+azure_openai_endpoint: "your-endpoint"
+api_key: "your-api-key"

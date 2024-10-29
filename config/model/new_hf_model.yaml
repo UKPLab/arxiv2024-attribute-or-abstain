@@ -1,0 +1,70 @@
+defaults:
+  - base_model_config # Leave this as is
+
+# This is a template yaml file for new huggingface models. To add your own model,
+# you need to set at least the following parameters:
+# - model_name
+# - model_class
+# - hf_model_id
+# - max_input_length
+# - prompt_template_without_example
+# - prompt_template_with_example
+# - example_template
+
+model_name: "your-model-name" # This should match the file name without .yaml ending
+model_class: causal_lm # "causal_lm" for decoder-only models, "seq2seq_lm" for encoder-decoder models
+hf_model_id: "mistralai/Mistral-7B-Instruct-v0.2" # Huggingface model id
+
+# MODEL PARAMETERS
+max_input_length: 16000 # Maximum number of input tokens. If input has more tokens, it will be truncated
+
+# Below, model-specific prompt templates are defined (the current prompts work
+# for Mistral-v0.2). These should be modified according to the requirements of
+# your model. There are 5 variables (see config/prompts.yaml for details):
+# task_explanation: Explanation of the task input and expected output
+# format_explanation: Explanation of the expected output format
+# task_input: Input for the current instance (e.g. a document and a question)
+# example: One or several examples consisting of input and output. This is
+#   formatted according to the example_template below
+# system_prompt: The system message to the model (not present here because
+#   Mistral does not have a special system message option).
+# <s> Is added automatically at beginning of prompts
+
+# This prompt template is used when n_examples = 0
+prompt_template_without_example: |-
+  [INST] Task: {task_explanation}
+  Answer format: {format_explanation}
+  {task_input} [/INST]
+
+# This prompt template is used when n_examples > 0
+prompt_template_with_example: |-
+  [INST] Task: {task_explanation}
+  Answer format: {format_explanation} [/INST]
+  {example}
+  [INST]{task_input} [/INST]
+
+# This prompt template is used for training a model and when a trained model
+# is loaded
+prompt_template_training: |-
+  [INST] Task: {task_explanation}
+  {task_input} [/INST]
+
+# This template is used to format examples.
+example_template: |-
+  [INST]{task_input} [/INST]{answer}</s>
+
+# TRAINING PARAMETERS (only need to be set if you want to train your model)
+max_steps: 3750 # Number of training steps
+val_check_interval: 1000 # Number of steps between validation
+batch_size: 1
+accumulate_grad_batches: 8 # Number of gradient accumulation steps
+learning_rate: 1e-4
+
+# LORA
+use_lora: True
+lora_r: 64
+lora_alpha: 16
+lora_dropout: 0.1
+lora_target_modules:
+  - "q_proj"
+  - "v_proj"

@@ -1,0 +1,24 @@
+description='reduced-post-hoc' task=qasper model=gpt-4-turbo-128k use_dev_as_test_data=False use_first_n_test_instances=100 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=natural_questions model=gpt-4-turbo-128k use_dev_as_test_data=False use_first_n_test_instances=100 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=evidence_inference model=gpt-4-turbo-128k use_dev_as_test_data=False use_first_n_test_instances=100 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=wice model=gpt-4-turbo-128k use_dev_as_test_data=False use_first_n_test_instances=100 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=contract_nli model=gpt-4-turbo-128k use_dev_as_test_data=False use_first_n_test_instances=100 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=govreport model=gpt-4-turbo-128k use_dev_as_test_data=False use_first_n_test_instances=100 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=qasper model=gpt-35-turbo-0613 use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=natural_questions model=gpt-35-turbo-0613 use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=evidence_inference model=gpt-35-turbo-0613 use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=wice model=gpt-35-turbo-0613 use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=contract_nli model=gpt-35-turbo-0613 use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=govreport model=gpt-35-turbo-0613 use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=qasper model=longchat-7b-v1.5-32k use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=natural_questions model=longchat-7b-v1.5-32k use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=evidence_inference model=longchat-7b-v1.5-32k use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=wice model=longchat-7b-v1.5-32k use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=contract_nli model=longchat-7b-v1.5-32k use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=govreport model=longchat-7b-v1.5-32k use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='TODO_reduced-post-hoc' task=qasper model=flan-t5-xl use_dev_as_test_data=False use_first_n_test_instances=2000 load_model=True hash_to_load=TODO do_retrieve_then_read=long required_aspects=answer_only
+description='TODO_reduced-post-hoc' task=natural_questions model=flan-t5-xl use_dev_as_test_data=False use_first_n_test_instances=2000 load_model=True hash_to_load=TODO do_retrieve_then_read=long required_aspects=answer_only
+description='TODO_reduced-post-hoc' task=evidence_inference model=flan-t5-xl use_dev_as_test_data=False use_first_n_test_instances=2000 load_model=True hash_to_load=TODO do_retrieve_then_read=long required_aspects=answer_only
+description='TODO_reduced-post-hoc' task=wice model=flan-t5-xl use_dev_as_test_data=False use_first_n_test_instances=2000 load_model=True hash_to_load=TODO do_retrieve_then_read=long required_aspects=answer_only
+description='TODO_reduced-post-hoc' task=contract_nli model=flan-t5-xl use_dev_as_test_data=False use_first_n_test_instances=2000 load_model=True hash_to_load=TODO do_retrieve_then_read=long required_aspects=answer_only
+description='TODO_reduced-post-hoc' task=govreport model=flan-t5-xl use_dev_as_test_data=False use_first_n_test_instances=2000 load_model=True hash_to_load=TODO do_retrieve_then_read=long required_aspects=answer_only

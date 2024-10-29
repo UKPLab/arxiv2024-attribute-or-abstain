@@ -1,3 +1,4 @@
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Union, Optional, Dict
@@ -305,7 +306,7 @@ def init_config(
         config.is_include_node_types = config.task.is_include_node_types
 
     # Set the number of instances to a maximum of 100 when using GPT 4
-    if config.model.model_name == 'gpt-4-turbo-128k' and config.use_first_n_test_instances > 100:
+    if config.model.model_name == 'gpt4-turbo-128k' and config.use_first_n_test_instances > 100:
         logger.info('Setting use_first_n_test_instances to 100 for GPT-4')
         config.use_first_n_test_instances = 100
 
@@ -331,17 +332,9 @@ def init_config(
         logger.info('Setting example_use_n_surrounding_nodes to 0')
         config.example_doc_max_n_chars_per_node = 100
         config.example_use_n_surrounding_nodes = 0
-        if str(config.location.results).startswith('/mnt'):
+        if str(os.getcwd()).startswith('/mnt'):
             logger.info('Setting instances_path for GovReport')
             config.instances_path = '/mnt/beegfs/shared/extraction_benchmark/datasets/govreport/attributed_bm25'
-    elif config.task.task_name == 'qasa':
-        logger.info('Setting example config for QASA')
-        logger.info('Setting example_doc_max_n_chars_per_node to 100')
-        logger.info('Setting example_use_n_surrounding_nodes to 2')
-        config.example_doc_max_n_chars_per_node = 100
-        config.example_use_n_surrounding_nodes = 2
-        logger.info('Setting instances_path for QASA')
-        config.instances_path = config.location.datasets / 'qasa' / 'instances'
     else:
         logger.info('Setting example config for other datasets')
         logger.info('Setting example_doc_max_n_chars_per_node to 10000')

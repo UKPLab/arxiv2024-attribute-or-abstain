@@ -1,0 +1,14 @@
+# Citation
+description='finetuning' model=flan-t5-xl task=qasper do_train=true
+description='finetuning' model=flan-t5-xl task=natural_questions do_train=true
+description='finetuning' model=flan-t5-xl task=evidence_inference do_train=true
+description='finetuning' model=flan-t5-xl task=wice do_train=true
+description='finetuning' model=flan-t5-xl task=contract_nli do_train=true
+description='finetuning' model=flan-t5-xl task=govreport do_train=true
+# No citation
+description='finetuning' model=flan-t5-xl task=qasper do_train=true required_aspects=answer_only
+description='finetuning' model=flan-t5-xl task=natural_questions do_train=true required_aspects=answer_only
+description='finetuning' model=flan-t5-xl task=evidence_inference do_train=true required_aspects=answer_only
+description='finetuning' model=flan-t5-xl task=wice do_train=true required_aspects=answer_only
+description='finetuning' model=flan-t5-xl task=contract_nli do_train=true required_aspects=answer_only
+description='finetuning' model=flan-t5-xl task=govreport do_train=true required_aspects=answer_only

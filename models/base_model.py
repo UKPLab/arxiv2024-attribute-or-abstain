@@ -327,7 +327,7 @@ class BaseModel(Module, abc.ABC):
             model_path = self.hydra_config.model.hf_model_id
 
         if self.hydra_config.use_vllm:
-            model = LLM(self.hydra_config.model.shared_checkpoint_path)
+            model = LLM(model_path)
         else:
             try:
                 # Try to use flash attention

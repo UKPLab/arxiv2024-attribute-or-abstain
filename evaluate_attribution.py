@@ -23,7 +23,7 @@ random.seed(RANDOM_SEED)
 
 
 DATA_DIR = {
-    'local': Path('../data/attribution/'),
+    'local': Path('../data'),
 }
 
 
@@ -262,7 +262,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--location',
         type=str,
-        default='local'
+        default='shared'
     )
     parser.add_argument(
         '--is_three_way_annotation',

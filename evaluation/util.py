@@ -323,6 +323,7 @@ def format_gold_answer_structured_text(
     try:
         formatted_segments = eval(f'f"""{segments_template}"""')
     except SyntaxError:
+        # TODO: check if this fix works
         segments_template = f"""{title}:"""
         formatted_segments = eval(f'f"""{segments_template}"""')
 
@@ -917,7 +918,7 @@ def should_prediction_be_considered_for_attribution(
         free_text_answer = prediction
     if task_name is None:
         task_name = prediction.task_name
-    if task_name in ['qasper', 'natural_questions', 'qasa']:
+    if task_name in ['qasper', 'natural_questions']:
         should_be_considered = is_prediction_answerable(free_text_answer)
     elif task_name in ['contract_nli', 'wice', 'evidence_inference']:
         label = find_label(classes, free_text_answer)

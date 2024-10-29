@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 import sys
 
-from evaluation.tasks.qasa_task import QASATask
+from config_lib import base_config
 
 sys.path.append('')
 from typing import List, Dict, Tuple
@@ -40,8 +40,7 @@ TASK_CLASSES = [
     EvidenceInferenceTask,
     GovReportTask,
     WiceTask,
-    ContractNLITask,
-    QASATask
+    ContractNLITask
 ]
 
 
@@ -54,18 +53,6 @@ AUTO_METRICS = {
         ],
         'metrics_for_pasting': [
             'answer_f1',
-            'attribution',
-            'unanswerable_f1'
-        ]
-    },
-    'qasa': {
-        'metrics': [
-            'rouge_l',
-            'attribution',
-            'unanswerable_f1'
-        ],
-        'metrics_for_pasting': [
-            'rouge_l',
             'attribution',
             'unanswerable_f1'
         ]
@@ -725,6 +712,7 @@ def analyze_predictions(
         results['score_by_answer_type'] = raw_results['score_by_answer_type']
         result_dict[metric_name] = results
 
+    # TODO: Move to statistics
     # Count the number of instances that are predicted as unanswerable or
     # that were parsing errors
     n_unanswerable_predicted = 0
@@ -834,7 +822,7 @@ def load_config(
 
     # Load config json into config object
     config: BaseConfig = BaseConfig.from_dict(config_dict, Path('../config'))
-
+    base_config.init_config(config)
     # Quick fix: Override post hoc retrieval model keys because some runs had
     # faulty configs
     with open(f'config/task/{config.task.task_name}.yaml') as f:
@@ -884,7 +872,6 @@ def main(
         do_post_hoc_extract: bool,
         do_retrieve_then_read: bool,
         do_evaluate_answer_f1: bool,
-        do_evaluate_rouge_l: bool,
         do_evaluate_bertscore: bool,
         do_evaluate_unanswerable_f1: bool,
         do_evaluate_attribution: bool,
@@ -939,8 +926,6 @@ def main(
             metrics = config.task.metrics
             if do_evaluate_answer_f1 and 'answer_f1' not in metrics:
                 metrics.append('answer_f1')
-            if do_evaluate_rouge_l and 'rouge_l' not in metrics:
-                metrics.append('rouge_l')
             if do_evaluate_bertscore and 'bertscore' not in metrics:
                 metrics.append('bertscore')
             if do_evaluate_unanswerable_f1 and 'unanswerable_f1' not in metrics:
@@ -1080,17 +1065,17 @@ if __name__ == '__main__':
     parser.add_argument(
         '--location',
         type=str,
-        default='shared'
+        default='local'
     )
     parser.add_argument(
         '--config_dir_path',
         type=Path,
-        default=Path('/mnt/beegfs/shared/extraction_benchmark/configs')
+        default=Path('/')
     )
     parser.add_argument(
         '--results_dir_path',
         type=Path,
-        default=Path('/mnt/beegfs/shared/extraction_benchmark/results')
+        default=Path('../data/results')
     )
     parser.add_argument(
         '--out_dir_path',
@@ -1115,10 +1100,6 @@ if __name__ == '__main__':
         action='store_true'
     )
     parser.add_argument(
-        '--rouge_l',
-        action='store_true'
-    )
-    parser.add_argument(
         '--bertscore',
         action='store_true'
     )
@@ -1140,7 +1121,7 @@ if __name__ == '__main__':
         action='store_true'
     )
     parser.add_argument(
-        '--attribution_predict_probs',
+        '--attribution_predict_binary',
         action='store_true'
     )
     parser.add_argument(
@@ -1229,13 +1210,12 @@ if __name__ == '__main__':
         args.post_hoc_extract,
         args.retrieve_then_read,
         args.answer_f1,
-        args.rouge_l,
         args.bertscore,
         args.unanswerable_f1,
         args.attribution,
         args.attribution_model_name,
         not args.attribution_no_concatenation,
-        not args.attribution_predict_probs,
+        args.attribution_predict_binary,
         args.post_hoc_retrieval_model,
         args.post_hoc_retrieval_k,
         args.post_hoc_retrieval_threshold,

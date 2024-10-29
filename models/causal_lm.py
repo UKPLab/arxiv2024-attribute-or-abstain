@@ -11,7 +11,6 @@ from models.base_model import BaseModel
 
 logger = logging.getLogger(__name__)
 
-
 class CausalLMForExtractionModel(BaseModel):
     """
     Class that should be able to load any model from huggingface transformers that
@@ -25,6 +24,10 @@ class CausalLMForExtractionModel(BaseModel):
             stats: Statistics,
             train_dataset: CustomDataset
     ):
+        # FIXME: Add padding token to tokenizer and model embedding matrix
+        #   when using batch size > 1. Currently not using pad tokens because
+        #   this will make model saving and loading with LORA more complicated.
+        #   Padding tokens were removed after commit 3243be6e9fa651a538462c6263d491795d212f07
         super(CausalLMForExtractionModel, self).__init__(config, stats, train_dataset)
 
 

@@ -16,14 +16,14 @@ from evaluation.util import find_label, is_instance_answerable, should_predictio
 
 def precision(confusion: Dict[str, int]) -> float:
     if confusion["TP"] == 0 and confusion["FP"] == 0:
-        return 0
+        return 0  # TODO: is this correct?
     else:
         return confusion["TP"] / (confusion["TP"] + confusion["FP"])
 
 
 def recall(confusion: Dict[str, int]) -> float:
     if confusion["TP"] == 0 and confusion["FN"] == 0:
-        return 0
+        return 0  # TODO: is this correct?
     else:
         return confusion["TP"] / (confusion["TP"] + confusion["FN"])
 
@@ -778,19 +778,19 @@ def evaluate_attribution(
     for instance, prediction in zip(
         instances, predictions
     ):
+        if answer_has_multiple_statements:
+            for _ in prediction.extraction_nodes:
+                raw_attribution_scores[prediction.example_id].append(0)
+        else:
+            raw_attribution_scores[prediction.example_id].append(0)
         # Make attribution instance (i.e. make claim from prediction)
         attribution_instances_for_prediction = make_attribution_instances_from_base_instance(
             instance,
             answer_has_multiple_statements,
             prediction=prediction,
-            skip_empty=False
+            skip_empty=True
         )
-        for i, attribution_instance in enumerate(attribution_instances_for_prediction):
-            # Set default attribution score to 0
-            raw_attribution_scores[prediction.example_id].append(0)
-            if attribution_instance.evidence:
-                # We skip attribution instances without evidence -> attribution score stays at 0
-                attribution_instances.append(attribution_instance)
+        attribution_instances.extend(attribution_instances_for_prediction)
 
     # Predict attribution scores
     for i in range(0, len(attribution_instances), batch_size):

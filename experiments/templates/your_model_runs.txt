@@ -1,0 +1,30 @@
+description='post-hoc' task=qasper model=TODO use_dev_as_test_data=False required_aspects=answer_only use_first_n_test_instances=2000
+description='post-hoc' task=natural_questions model=TODO use_dev_as_test_data=False required_aspects=answer_only use_first_n_test_instances=2000
+description='post-hoc' task=evidence_inference model=TODO use_dev_as_test_data=False required_aspects=answer_only use_first_n_test_instances=2000
+description='post-hoc' task=wice model=TODO use_dev_as_test_data=False required_aspects=answer_only use_first_n_test_instances=2000
+description='post-hoc' task=contract_nli model=TODO use_dev_as_test_data=False required_aspects=answer_only use_first_n_test_instances=2000
+description='post-hoc' task=govreport model=TODO use_dev_as_test_data=False 
+description='retrieve-then-read' task=qasper model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=natural_questions model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=evidence_inference model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=wice model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=contract_nli model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=govreport model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='citation' task=qasper model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000
+description='citation' task=natural_questions model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000
+description='citation' task=evidence_inference model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000
+description='citation' task=wice model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000
+description='citation' task=contract_nli model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000
+description='citation' model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000
+description='reduced-post-hoc' task=qasper model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=natural_questions model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=evidence_inference model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=wice model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=contract_nli model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-post-hoc' task=govreport model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long required_aspects=answer_only
+description='reduced-citation' task=qasper model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long
+description='reduced-citation' task=natural_questions model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long
+description='reduced-citation' task=evidence_inference model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long
+description='reduced-citation' task=wice model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long
+description='reduced-citation' task=contract_nli model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long
+description='reduced-citation' task=govreport model=TODO use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=long

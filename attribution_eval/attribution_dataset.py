@@ -4,9 +4,6 @@ import random
 from pathlib import Path
 from typing import List, Dict
 import sys
-
-from evaluation.tasks.qasa_task import QASATask
-
 sys.path.append('..')
 
 import hydra
@@ -235,7 +232,7 @@ def make_attribution_instances_from_base_instance(
                 )
                 evidence = '\n'.join(n.content for n in sorted_extraction_nodes_for_sentence)
                 evidence = format_evidence(instance.document.nodes[0].content, evidence)
-                if instance.task_name in ['govreport', 'qasa']:
+                if instance.task_name in ['govreport']:
                     claim = make_claim_from_summarization(answer_sentence)
                     label = 1
                 else:
@@ -589,11 +586,10 @@ if __name__ == '__main__':
         'wice': WiceTask,
         'govreport': GovReportTask,
         'contract_nli': ContractNLITask,
-        'qasa': QASATask
     }
 
     OUT_PATHS = {
-        'local': Path('..//data/attribution/datasets'),
+        'local': Path('../data/attribution/datasets'),
     }
 
     parser = argparse.ArgumentParser()
@@ -605,7 +601,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--location',
         type=str,
-        default='local'
+        default='shared'
     )
     parser.add_argument(
         '--partition',

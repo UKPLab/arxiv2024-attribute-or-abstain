@@ -1,0 +1,12 @@
+# TRUE model
+python evaluate_attribution.py --description 'true_nli-qasper' --model_name true_nli --task_name qasper --partition dev --is_csv
+python evaluate_attribution.py --description 'true_nli-natural-questions' --model_name true_nli --task_name natural_questions --partition dev --is_csv
+python evaluate_attribution.py --description 'true_nli-govreport' --model_name true_nli --task_name govreport --partition dev --is_csv
+# Attrscore model
+python evaluate_attribution.py --description 'attrscore-qasper' --model_name attrscore --task_name qasper --partition dev --is_csv
+python evaluate_attribution.py --description 'attrscore-natural-questions' --model_name attrscore --task_name natural_questions --partition dev --is_csv
+python evaluate_attribution.py --description 'attrscore-govreport' --model_name attrscore --task_name govreport --partition dev --is_csv
+# Minicheck model
+python evaluate_attribution.py --description 'minicheck-qasper' --model_name minicheck --task_name qasper --partition dev --is_csv
+python evaluate_attribution.py --description 'minicheck-natural-questions' --model_name minicheck --task_name natural_questions --partition dev --is_csv
+python evaluate_attribution.py --description 'minicheck-govreport' --model_name minicheck --task_name govreport --partition dev --is_csv

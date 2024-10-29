@@ -3,8 +3,7 @@ defaults:
 
 model_name: "flan-t5-xxl"
 model_class: seq2seq_lm
-load_from_shared: True
-shared_checkpoint_path: "/mnt/beegfs/shared/shared_model_weights/models--google--flan-t5-xxl-hf/flan-t5-xxl"
+load_from_shared: False
 hf_model_id: "google/flan-t5-xxl"
 
 # MODEL PARAMETERS

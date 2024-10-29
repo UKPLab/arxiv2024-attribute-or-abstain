@@ -17,15 +17,8 @@ class AttributionBaseModel(Module):
         super(AttributionBaseModel, self).__init__()
         self.model = self._load_model()
         self.tokenizer = self._load_tokenizer()
+        self.prompt_template = None
         self.predict_max_in_batch = predict_max_in_batch
-
-    @property
-    def prompt_template(self) -> None | str:
-        return None
-
-    @property
-    def max_length(self) -> int:
-        return 1000
 
     @staticmethod
     def load_model(
@@ -69,28 +62,6 @@ class AttributionBaseModel(Module):
                 claim=instance.claim,
                 evidence=instance.evidence
             )
-            # Check number of tokens
-            tokenized_text = self.tokenizer(
-                formatted_text,
-                return_tensors='pt'
-            )
-            n_tokens_in_text = tokenized_text['input_ids'].shape[1]
-            if n_tokens_in_text > self.max_length:
-                # Truncate evidence to get to max_length tokens
-                tokenized_evidence = self.tokenizer(
-                    instance.evidence,
-                    return_tensors='pt'
-                )
-                n_tokens_in_evidence = tokenized_evidence['input_ids'].shape[1]
-                evidence_n_target_tokens = n_tokens_in_evidence - (n_tokens_in_text - self.max_length)
-                evidence = self._truncate(
-                    instance.evidence,
-                    evidence_n_target_tokens
-                )
-                formatted_text = self.prompt_template.format(
-                    claim=instance.claim,
-                    evidence=evidence
-                )
             texts.append(formatted_text)
 
         tokenized_input = self.tokenizer(
@@ -98,27 +69,10 @@ class AttributionBaseModel(Module):
             return_tensors='pt',
             padding=True,
             truncation='longest_first',
-            max_length=self.max_length
+            max_length=1000
         )
-        return tokenized_input
 
-    def _truncate(
-            self,
-            text: str,
-            target_n_tokens: int
-    ):
-        """Truncate text such that it has target_n_tokens when tokenized."""
-        tokenized_text = self.tokenizer(
-            text,
-            add_special_tokens=False,
-            return_tensors='pt'
-        )
-        n_tokens_in_text = tokenized_text['input_ids'].shape[1]
-        if n_tokens_in_text > target_n_tokens:
-            text = self.tokenizer.decode(
-                tokenized_text['input_ids'][0, :target_n_tokens].tolist()
-            )
-        return text
+        return tokenized_input
 
     def predict(
             self,
@@ -189,10 +143,7 @@ class AttrScoreModel(AttributionBaseModel):
             for label_name in label_map
         }
 
-    @property
-    def prompt_template(self) -> None | str:
-
-        return (
+        self.prompt_template = (
             "Below is an instruction that describes a task, paired with an input"
             " that provides further context. Write a response that appropriately "
             "completes the request.\n\n"
@@ -298,10 +249,7 @@ class TRUEModel(AttributionBaseModel):
         )
 
         self.predict_binary = predict_binary
-
-    @property
-    def prompt_template(self) -> None | str:
-        return 'premise: {evidence} hypothesis: {claim}'
+        self.prompt_template = 'premise: {evidence} hypothesis: {claim}'
 
     def _load_model(self) -> PreTrainedModel:
         hf_model_id = 'google/t5_xxl_true_nli_mixture'
@@ -374,10 +322,7 @@ class MiniCheckModel(AttributionBaseModel):
             predict_max_in_batch=predict_max_in_batch
         )
         self.predict_binary = predict_binary
-
-    @property
-    def prompt_template(self) -> None | str:
-        return "predict: {evidence}</s>{claim}"
+        self.prompt_template = "predict: {evidence}</s>{claim}"
 
     def _load_model(self) -> PreTrainedModel:
         hf_model_id = 'lytang/MiniCheck-Flan-T5-Large'

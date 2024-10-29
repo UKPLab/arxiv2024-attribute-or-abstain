@@ -1,0 +1,30 @@
+# QASPER
+# retrieve-then-read, citation and reduced-citation
+TODO --attribution_model_name minicheck
+# post-hoc and reduced-post-hoc
+TODO --attribution_model_name minicheck --post_hoc_extract --attribution_predict_probs
+# Natural Questions
+# retrieve-then-read, citation and reduced-citation
+TODO --attribution_model_name true_nli --attribution_predict_probs
+# retrieve-then-read, citation and reduced-citation
+TODO --attribution_model_name true_nli --post_hoc_extract --attribution_predict_probs
+# Evidence Inference
+# retrieve-then-read, citation and reduced-citation
+TODO --attribution_model_name true_nli --attribution_predict_probs
+# retrieve-then-read, citation and reduced-citation
+TODO --post_hoc_extract --attribution_model_name true_nli --attribution_predict_probs
+# Wice
+# retrieve-then-read, citation and reduced-citation
+TODO --attribution_model_name true_nli --attribution_predict_probs
+# retrieve-then-read, citation and reduced-citation
+TODO --post_hoc_extract --attribution_model_name true_nli --attribution_predict_probs
+# ContractNLI
+# retrieve-then-read, citation and reduced-citation
+TODO --attribution_model_name true_nli --attribution_predict_probs
+# retrieve-then-read, citation and reduced-citation
+TODO --post_hoc_extract --attribution_model_name true_nli --attribution_predict_probs
+GovReport
+# retrieve-then-read, citation and reduced-citation
+TODO --attribution_model_name true_nli --attribution_predict_probs
+# retrieve-then-read, citation and reduced-citation
+TODO --post_hoc_extract --attribution_model_name true_nli --attribution_predict_probs

@@ -5,7 +5,7 @@ commit_hash: "dummy-commit-hash"
 defaults:
   - base_config
   - _self_
-  - location: shared
+  - location: local
   - task: qasper
   - model: vicuna-7B-v1.5-16K
   - override hydra/hydra_logging: disabled

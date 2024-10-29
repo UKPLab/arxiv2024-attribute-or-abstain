@@ -2,5 +2,7 @@ datasets: ../data/datasets
 models: ../data/models
 tensorboard: ../data/tensorboard
 results: ../data/results
+predictions: ../data/predictions
+configs: ../data/configs
 prompts: config/prompts.yaml
 openai_cost_tracking: ../data/openai_cost_tracking

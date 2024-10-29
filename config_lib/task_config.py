@@ -77,10 +77,6 @@ class BaseTaskConfig(ConfigContainer):
     :param wice_claim_or_subclaim: Whether to use the "claim" or the "subclaim"
         part of the wice dataset.
 
-    # QASA
-    :param qasa_example_ids_in_test_set: The ids of instances from the
-        test set that are added to the (empty) training set to be used as examples
-
     # Document Pruning
     :param keep_k_random_nodes_when_pruning: When doing pruning, keep this number
         of random paragraph nodes when there are no annotated extraction nodes.
@@ -140,9 +136,6 @@ class BaseTaskConfig(ConfigContainer):
 
     # WiCE
     wice_claim_or_subclaim: Optional[str] = None
-
-    # QASA
-    qasa_example_ids_in_test_set: Optional[List[str]] = None
 
     # Pruning
     keep_k_random_nodes_when_pruning: Optional[int] = None

@@ -28,6 +28,6 @@ system_message_template: |-
   {format_explanation}
 
 # OpenAI
-deployment_name: gpt-35-turbo-0613-16k
+deployment_name: null
 azure_openai_endpoint: null
 api_key: null

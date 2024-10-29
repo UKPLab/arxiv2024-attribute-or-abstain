@@ -3,7 +3,7 @@ defaults:
 
 model_name: "gemma-7b-it"
 model_class: causal_lm
-load_from_shared: True
+load_from_shared: False
 hf_model_id: "google/gemma-7b-it"
 
 # MODEL PARAMETERS

@@ -1,0 +1,24 @@
+description='retrieve-then-read' task=qasper model=gpt-4-turbo-128k use_dev_as_test_data=False use_first_n_test_instances=100 do_retrieve_then_read=short
+description='retrieve-then-read' task=natural_questions model=gpt-4-turbo-128k use_dev_as_test_data=False use_first_n_test_instances=100 do_retrieve_then_read=short
+description='retrieve-then-read' task=evidence_inference model=gpt-4-turbo-128k use_dev_as_test_data=False use_first_n_test_instances=100 do_retrieve_then_read=short
+description='retrieve-then-read' task=wice model=gpt-4-turbo-128k use_dev_as_test_data=False use_first_n_test_instances=100 do_retrieve_then_read=short
+description='retrieve-then-read' task=contract_nli model=gpt-4-turbo-128k use_dev_as_test_data=False use_first_n_test_instances=100 do_retrieve_then_read=short
+description='retrieve-then-read' task=govreport model=gpt-4-turbo-128k use_dev_as_test_data=False use_first_n_test_instances=100 do_retrieve_then_read=short
+description='retrieve-then-read' task=qasper model=gpt-35-turbo-0613 use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=natural_questions model=gpt-35-turbo-0613 use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=evidence_inference model=gpt-35-turbo-0613 use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=wice model=gpt-35-turbo-0613 use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=contract_nli model=gpt-35-turbo-0613 use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=govreport model=gpt-35-turbo-0613 use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=qasper model=longchat-7b-v1.5-32k use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=natural_questions model=longchat-7b-v1.5-32k use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=evidence_inference model=longchat-7b-v1.5-32k use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=wice model=longchat-7b-v1.5-32k use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=contract_nli model=longchat-7b-v1.5-32k use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='retrieve-then-read' task=govreport model=longchat-7b-v1.5-32k use_dev_as_test_data=False use_first_n_test_instances=2000 do_retrieve_then_read=short
+description='TODO_retrieve-then-read' task=qasper model=flan-t5-xl use_dev_as_test_data=False use_first_n_test_instances=2000 load_model=True hash_to_load=TODO do_retrieve_then_read=short
+description='TODO_retrieve-then-read' task=natural_questions model=flan-t5-xl use_dev_as_test_data=False use_first_n_test_instances=2000 load_model=True hash_to_load=TODO do_retrieve_then_read=short
+description='TODO_retrieve-then-read' task=evidence_inference model=flan-t5-xl use_dev_as_test_data=False use_first_n_test_instances=2000 load_model=True hash_to_load=TODO do_retrieve_then_read=short
+description='TODO_retrieve-then-read' task=wice model=flan-t5-xl use_dev_as_test_data=False use_first_n_test_instances=2000 load_model=True hash_to_load=TODO do_retrieve_then_read=short
+description='TODO_retrieve-then-read' task=contract_nli model=flan-t5-xl use_dev_as_test_data=False use_first_n_test_instances=2000 load_model=True hash_to_load=TODO do_retrieve_then_read=short
+description='TODO_retrieve-then-read' task=govreport model=flan-t5-xl use_dev_as_test_data=False use_first_n_test_instances=2000 load_model=True hash_to_load=TODO do_retrieve_then_read=short

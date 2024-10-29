@@ -19,7 +19,6 @@ from evaluation.util import find_label, should_prediction_be_considered_for_attr
 TASK_TYPE_MAPPING = {
     'qasper': 'qa',
     'natural_questions': 'qa',
-    'qasa': 'qasa',
     'evidence_inference': 'ei',
     'govreport': 'sum',
     'contract_nli': 'nli',
@@ -433,8 +432,6 @@ class ClassicRetriever(BaseRetriever):
                 ))
             elif task_type == 'nli':
                 queries.append(make_nli_query(instance.statement, ans))
-            elif task_type == 'qasa':
-                queries.append(make_sum_query(ans))
             else:
                 raise NotImplementedError
 
@@ -471,8 +468,6 @@ class ClassicRetriever(BaseRetriever):
         elif task_type == 'sum':
             for n in instance.extraction_candidates:
                 queries.append(make_sum_query(n.content))
-        elif task_type == 'qasa':
-            queries.append(make_qa_query(instance.question))
 
         return queries
 

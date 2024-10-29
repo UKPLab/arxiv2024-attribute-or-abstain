@@ -1,35 +1,55 @@
+# This file defines the static building blocks for prompts:
+# - system_prompt
+# - task_explanation
+# - format_explanation
+# Depending on the configuration, they are combined with examples and instance
+# specific input to get the final prompt. See config/models/new_hf_model.yaml
+# for example prompt templates.
+
+# system_prompt is an initial generic message to the models. This is only used
+# for some models.
 system_prompt:
   basic: You are a helpful AI assistant.
 
+# task_explanation explains the task input and expexted output. There are
+# different task explanations depending on the required output of the model.
+# This is set by the required_aspects config parameter.
+# See README.md for more information.
+# answer_and_segments is used for citation and reduced-citation
+# answer_only is used for post-hoc, reduced-post-hoc and retrieve-then-read
 task_explanation:
   qasper:
-    empty: ''
     answer_and_segments: You are given a Scientific Article and a Question. Answer the Question as concisely as you can, using a single phrase or sentence. If the Question cannot be answered based on the information in the Article, answer "unanswerable". If the question is a yes/no question, your answer should be "yes", "no", or "unanswerable". Do not provide any explanation. If the question can be answered, provide one or several evidence paragraphs that can be used to verify the answer. Give as few paragraphs as possible.
     answer_only: You are given a Scientific Article and a Question. Answer the Question as concisely as you can, using a single phrase or sentence if possible. If the Question cannot be answered based on the information in the Article, write "unanswerable". If the question is a yes/no question, answer "yes", "no", or "unanswerable". Do not provide any explanation.
-    segments_only: You are given a Scientific Article and a Question. If the Question can be answered, provide one or several segments that contain the answer. Give as few segments as possible.
-    segments_only_short: "Return the segment that contains the answer to the question:"
   evidence_inference:
-    empty: ''
     answer_and_segments: You are given a clinical study report and a question. Assess the effect of a treatment on a clinical outcome, compared to a control treatment. The options are "significantly increased", "significantly decreased" and "no significant difference". Do not provide any explanation. Provide one or several evidence paragraphs that can be used to verify the answer. Give as few paragraphs as possible.
     answer_only: You are given a clinical study report and a question. Assess the effect of a treatment on a clinical outcome, compared to a control treatment. The options are "significantly increased", "significantly decreased" and "no significant difference". Do not provide any explanation.
-    # segments_only: You are given a clinical study report and a question. Return the paragraphs from the clinical report that are relevant for answering the question. Give as few paragraphs as possible. Do not provide any explanation.
   natural_questions:
     answer_and_segments: 'You are given a Wikipedia page and a question about that page. Answer the question as concisely as you can, using at most five (5) words. If the question cannot be answered based on the information in the article, write "unanswerable". If the question is a yes/no question, answer "yes", "no", or "unanswerable". Do not provide any explanation. If the question can be answered, provide one evidence paragraph that can be used to verify the answer.'
     answer_only: 'You are given a Wikipedia page and a question about that page. Answer the question as concisely as you can, using at most five (5) words. If the question cannot be answered based on the information in the article, write "unanswerable". If the question is a yes/no question, answer "yes", "no", or "unanswerable". Do not provide any explanation.'
-    empty: ''
   govreport:
     answer_and_segments: You are given a government report document. Write a one page summary of the document. Each sentence in your summary should reference the source paragraphs from the document that can be used to verify the summary sentence.
     answer_only: You are given a government report document. Write a one page summary of the document.
   contract_nli:
     answer_and_segments: You are given a non disclosure agreement contract and a statement. Determine the relation between the contract and the statement. You can choose between “entailment”, “contradiction” and “not mentioned”. Do not add any explanation. If you answer “entailment” or “contradiction”, provide the evidence paragraphs from the contract that can be used to verify the answer. Give as few paragraphs as possible.
     answer_only: You are given a non disclosure agreement contract and a statement. Determine the relation between the contract and the statement. You can choose between “entailment”, “contradiction” and “not mentioned”. Do not add any explanation.
-  qasa:
-    answer_and_segments: You are given a Scientific Article and a Question. Answer the Question concisely, using at most 4 sentences. If the Question cannot be answered based on the information in the Article, answer "unanswerable". If the question can be answered, provide one or several evidence paragraphs that can be used to verify the answer. Give as few paragraphs as possible.
-    answer_only: You are given a Scientific Article and a Question. Answer the Question concisely, using at most 4 sentences. If the Question cannot be answered based on the information in the Article, answer "unanswerable".
   wice:
     answer_and_segments: You are given a document and a claim. Evaluate if the claim is supported by the document. You can choose between “supported”, “partially supported” and “not supported”. Do not add any explanation. If you answer “supported” or “partially supported”, provide the evidence sentences from the document that can be used to verify the answer. Give as few sentences as possible.
     answer_only: You are given a document and a claim. Evaluate if the claim is supported by the document. You can choose between “supported”, “partially supported” and “not supported”. Do not add any explanation.
-format_explanation: # Dummy formatted answers (e.g. {"answer": <answer>}) are added automatically if needed
+
+# format_explanation explains the expected output format. The format explanation
+# consists of a textual description of the output format and a dummy example
+# response. For example:
+# "Your reply must be in the following format: "<answer> [X] [Y]". The dummy
+# example response is inserted automatically after the textual description.
+# See evaluation/util.make_format_explanation.
+# There are two config parameters that control the format explanation:
+# 1. extraction_mode: can be "text" or "node_id". In the paper we only use node_id.
+# 2. task.answer_has_multiple_statements: For all tasks except GovReport, only a single
+#   response statement is expected (False), for GovReport, multiple response
+#   statements are expected (True).
+# 3. answer_format: can be "text" or "json". In the paper we only use "text".
+format_explanation: #
   # extraction mode
   text:
     # multi statement or single statement answer
@@ -42,7 +62,6 @@ format_explanation: # Dummy formatted answers (e.g. {"answer": <answer>}) are ad
       json: |- # dummy json is inserted automatically after text
         Your reply must be in json format:
         {dummy_answer}
-        In your answer, replace
   # extraction_mode
   node_id:
     # multi-statement or single statement answer

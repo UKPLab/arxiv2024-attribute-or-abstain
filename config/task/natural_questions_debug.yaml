@@ -1,0 +1,41 @@
+defaults:
+  - base_task_config
+  - _self_
+
+task_name: natural_questions
+
+max_new_tokens: 50
+
+metrics:
+  - answer_f1
+
+train_filenames: train_filenames.json
+dev_filenames: val_filenames.json
+test_filenames: test_filenames.json
+answer_has_multiple_statements: False
+natural_questions_use_first_non_null_answer: True
+null_answer_string: 'Null'
+has_statement: False
+is_include_node_types:
+  - "article-title"
+  - "abstract"
+  - "title"
+  - "p"
+  - "list"
+  - "list-item"
+  - "table"
+  - "table-row"
+  - "table-item"
+
+count_missing_predictions: False
+
+task_input_template: |-
+  Document: {context} [End of Document]
+  Question: {question}
+
+example_ids:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4

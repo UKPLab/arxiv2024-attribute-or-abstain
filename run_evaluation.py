@@ -2,6 +2,7 @@
 Run the evaluation environment that fine-tunes and evaluates a model on an end task.
 """
 import logging
+import os
 
 import hydra
 import pytorch_lightning as pl
@@ -15,7 +16,6 @@ from evaluation.tasks.qasper_task import QASPERTask
 from evaluation.tasks.natural_questions_task import NaturalQuestionsTask
 from evaluation.tasks.wice_task import WiceTask
 from evaluation.tasks.contract_nli_task import ContractNLITask
-from evaluation.tasks.qasa_task import QASATask
 from models.seq2seq_lm import (
     Seq2SeqForExtractionModel
 )
@@ -33,7 +33,6 @@ TASK_CLASSES = [
     GovReportTask,
     WiceTask,
     ContractNLITask,
-    QASATask
 ]
 
 # Get all available model classes
