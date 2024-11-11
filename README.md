@@ -374,15 +374,25 @@ single_slurm_job.sh <- Job script for slurm jobs
 
 If you use our data or code in your research, please cite
 
-@misc{buchmann2024attributeabstainlargelanguage,
-      title={Attribute or Abstain: Large Language Models as Long Document Assistants}, 
-      author={Jan Buchmann and Xiao Liu and Iryna Gurevych},
-      year={2024},
-      eprint={2407.07799},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2407.07799}, 
+```
+@inproceedings{buchmann-etal-2024-attribute,
+    title = "Attribute or Abstain: Large Language Models as Long Document Assistants",
+    author = "Buchmann, Jan  and
+      Liu, Xiao  and
+      Gurevych, Iryna",
+    editor = "Al-Onaizan, Yaser  and
+      Bansal, Mohit  and
+      Chen, Yun-Nung",
+    booktitle = "Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2024",
+    address = "Miami, Florida, USA",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.emnlp-main.463",
+    pages = "8113--8140",
+    abstract = "LLMs can help humans working with long documents, but are known to hallucinate. *Attribution* can increase trust in LLM responses: The LLM provides evidence that supports its response, which enhances verifiability. Existing approaches to attribution have only been evaluated in RAG settings, where the initial retrieval confounds LLM performance. This is crucially different from the long document setting, where retrieval is not needed, but could help. Thus, a long document specific evaluation of attribution is missing. To fill this gap, we present LAB, a benchmark of 6 diverse long document tasks with attribution, and experiments with different approaches to attribution on 5 LLMs of different sizes. We find that *citation*, i.e. response generation and evidence extraction in one step, performs best for large and fine-tuned models, while additional retrieval can help for small, prompted models. We investigate whether the {``}Lost in the Middle{''} phenomenon exists for attribution, but do not find this. We also find that evidence quality can predict response quality on datasets with simple responses, but not so for complex responses, as models struggle with providing evidence for complex claims. We release code and data for further investigation. [Link](https://github.com/UKPLab/arxiv2024-attribute-or-abstain)",
 }
+```
 
 ## Disclaimer
 
