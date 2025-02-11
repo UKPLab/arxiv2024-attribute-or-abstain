@@ -14,7 +14,7 @@ From the abstract of the paper:
 
 Using this repository, the ability of LLMs (in combination with retrievers) to produce attributed responses to long document tasks can be tested. 
 
-To download the pre-formatted datasets, please see [here](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/4276.2).
+To download the pre-formatted datasets, please see [here](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/4276.4).
 
 ## Setup
 
